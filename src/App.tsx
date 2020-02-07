@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers';
 import { RootState, ActionTypes } from './types';
 import './App.css';
-import LuasContainer from './containers/Luas';
+import Luas from './containers/Luas';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // const store = createStore(appReducer);
@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <LuasContainer coordinates={coordinates} />
+      <Luas coordinates={coordinates} />
     </Provider>
   );
 }

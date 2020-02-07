@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import { makeStyles } from '@material-ui/core/styles';
 import { LuasStopTimesApiResponse, LuasStation } from '../../types';
 
 export interface LuasStopProps {
@@ -19,6 +20,14 @@ interface MappedLuasTime {
 
 }
 
+const useStyles = makeStyles({
+  row: {
+    '&:last-child td': {
+      borderBottom: '0',
+    },
+  }
+})
+
 const LuasStop: React.FunctionComponent<LuasStopProps> = ({
   station,
   stationInfo,
@@ -27,6 +36,8 @@ const LuasStop: React.FunctionComponent<LuasStopProps> = ({
   useEffect(() => {
     fetchLuasStopTimes(station.shortName);
   }, [fetchLuasStopTimes, station]);
+
+  const classes = useStyles();
 
   const maxTimeRows: number = stationInfo ? stationInfo.direction.reduce<number>((acc, direction) => {
     if (direction.tram.length > acc) {
@@ -37,10 +48,10 @@ const LuasStop: React.FunctionComponent<LuasStopProps> = ({
 
   return (
     stationInfo ? (
-      <Card>
+      <Card variant="outlined">
         <CardHeader title={`Luas: ${stationInfo.stop}`} />
         <CardContent>
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow>
                 {stationInfo.direction.map((direction) => (
@@ -50,7 +61,7 @@ const LuasStop: React.FunctionComponent<LuasStopProps> = ({
             </TableHead>
             <TableBody>
               {Array.from(Array(maxTimeRows)).map((_, i) => (
-                <TableRow key={i}>
+                <TableRow key={i} className={classes.row}>
                   {stationInfo.direction.map(direction => (
                     <React.Fragment key={`${direction.name}_${i}`}>
                       <TableCell>{direction.tram[i] && direction.tram[i].destination}</TableCell>
