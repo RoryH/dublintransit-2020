@@ -16,3 +16,22 @@ export interface LuasStation {
 export interface LuasStopsApiResponse {
   stations: LuasStation[];
 }
+
+export interface LuasInstance {
+    dueMins: string;
+    destination: string;
+}
+
+export interface LuasDirection {
+    name: string;
+    tram: LuasInstance[];
+}
+
+export interface LuasStopTimesApiResponse {
+  created: Date;
+  stop: string;
+  stopAbv: string;
+  message: string;
+  direction: LuasDirection[];
+}
+

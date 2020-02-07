@@ -1,4 +1,4 @@
-import { LuasStation } from './api-data';
+import { LuasStation, LuasStopTimesApiResponse } from './api-data';
 
 export interface RootState {
   luas: LuasState;
@@ -7,4 +7,5 @@ export interface RootState {
 interface LuasState {
   stations: LuasStation[];
   nearestStation: LuasStation | undefined;
+  stationInfo: LuasStopTimesApiResponse | undefined;
 }

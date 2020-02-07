@@ -5,6 +5,7 @@ const getInitialState = (): RootState => ({
   luas: {
     stations: [],
     nearestStation: undefined,
+    stationInfo: undefined,
   },
 });
 
@@ -27,6 +28,14 @@ export default (state: RootState = getInitialState(), action: ActionTypes) => {
           nearestStation: action.station,
         },
       };
+    case Actions.FETCH_LUAS_STOP_TIMES_SUCCESS:
+        return {
+          ...state,
+          luas: {
+            ...state.luas,
+            stationInfo: action.payload,
+          },
+        };
   }
   return state;
 }

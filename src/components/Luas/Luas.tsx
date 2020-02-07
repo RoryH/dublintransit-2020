@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import Container from '@material-ui/core/Container';
 import { LuasStation } from '../../types';
+import LuasStop from '../../containers/LuasStop';
 
 export interface LuasProps {
   coordinates?: Coordinates;
@@ -26,13 +28,11 @@ const Luas: React.FunctionComponent<LuasProps> = ({
     }
   }, [coordinates, findNearestStop, stations]);
 
-  return coordinates ? (
-    <div>
-      <h1>Station</h1>
-      <div>{coordinates.latitude}, {coordinates.longitude}</div>
-      {nearestStation && nearestStation.displayName}
-    </div>
-  ) : <div>Please allow location...</div>;
+  return coordinates && nearestStation ? (
+    <Container>
+      <LuasStop station={nearestStation} />
+    </Container>
+  ) : <Container>Please allow location...</Container>;
 }
 
 export default Luas;
